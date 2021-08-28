@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<%- partial('_partial/head') %>
+<body>
+  <%- partial('_partial/cover') %>
+  <div class="l_body<%- page.cover ? '' : ' nocover' %>">
+    <div class='body-wrapper'>
+      <%- body %>
+      <script>setLoadingBarProgress(60);</script>
+    </div>
+    <a class="s-top fas fa-arrow-up fa-fw" href='javascript:void(0)'></a>
+  </div>
+  <%- partial('_partial/scripts') %>
+  <%- partial('gzw/index') %>
+  <script>setLoadingBarProgress(100);</script>
+  <% if (theme.graphviz.enable && page.graphviz) { %>
+    <script src='https://cdnjs.loli.net/ajax/libs/viz.js/1.7.1/viz.js'></script>
+    <script>String.prototype.replaceAll=function(search,replacement){var target=this;return target.split(search).join(replacement)};let vizObjects=document.querySelectorAll('.graphviz');for(let item of vizObjects){let svg=undefined;try{svg=Viz(item.textContent.replaceAll('–','--'),'svg')}catch(e){svg=`<pre class="error">${e}</pre>`}item.outerHTML=svg}</script>
+    <!-- <script>
+      String.prototype.replaceAll = function(search, replacement) {
+        var target = this;
+        return target.split(search).join(replacement);
+      };
+      let vizObjects = document.querySelectorAll('.graphviz')
+      for (let item of vizObjects) {
+        let svg = undefined
+        try {
+          svg = Viz(item.textContent.replaceAll('–', '--'), 'svg')
+        } catch(e) {
+          svg = `<pre class="error">${e}</pre>`
+        }
+        item.outerHTML = svg
+      }
+    </script> -->
+  <% } %>
+</body>
+</html>
